@@ -295,4 +295,10 @@ def render_shift_overlay(screen) :
     text_rect.x = 40
     text_rect.centery = 200
     screen.blit(text, text_rect)
+    
+    text = font.render(etc.shift_line[3], True, etc.WHITE, etc.BLACK)
+    text_rect = text.get_rect()
+    text_rect.x = 40
+    text_rect.centery = 250
+    screen.blit(text, text_rect)
 

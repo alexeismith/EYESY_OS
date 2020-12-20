@@ -56,6 +56,7 @@ class System:
     scenes = []     # 
     scene_index = 0
     save_key_status = False
+    save_disable = False
     save_key_count = 0
     scene_set = False
     
@@ -104,7 +105,7 @@ class System:
     shift = False
     osd_first = False # when osd is first turned on this is used to gather info
     trig_button = False # if the button is held down or not
-    shift_line = ["","",""]
+    shift_line = ["","","",""]
 
     def update_trig_button(self, stat) :
         if (stat > 0 ):
