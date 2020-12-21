@@ -1,4 +1,4 @@
-#N canvas 105 49 1123 660 10;
+#N canvas 337 177 1123 660 10;
 #X obj 108 350 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 108 278 packOSC;
@@ -14,7 +14,7 @@
 #X obj 295 206 shell;
 #X msg 295 178 ./pd_loaded.sh;
 #X obj 295 152 delay 100;
-#N canvas 78 148 1040 523 midi 1;
+#N canvas 78 148 1040 523 midi 0;
 #X obj 60 40 notein;
 #X text 60 16 MIDI IN;
 #X obj 329 38 ctlin;
@@ -76,7 +76,7 @@
 #X connect 25 0 7 0;
 #X connect 25 0 26 0;
 #X restore 714 97 pd midi;
-#N canvas 168 273 1168 585 shift-params 1;
+#N canvas 44 23 1636 1005 shift-params 0;
 #X obj 272 1 r shiftKey;
 #X obj 375 106 == 0;
 #X obj 401 141 s enableKnobs;
@@ -113,7 +113,7 @@
 #X obj 416 340 spigot 0;
 #X obj 219 317 r knob2;
 #X obj 418 311 r knob3;
-#N canvas 11 50 1188 455 shift-display 0;
+#N canvas 45 130 1616 469 shift-display 0;
 #X msg 79 153 sendtyped /shift i \$1;
 #X obj 387 421 s oscOut;
 #X msg 268 159 send /sline 0 Input Gain \$1 %;
@@ -132,6 +132,8 @@
 #X msg 537 290 send /sline 1 Trigger Source MIDI Clock Eighth Note
 ;
 #X obj 502 168 sel 1 2 3 4 5 6;
+#X obj 1124 76 r disableSave;
+#X msg 1218 312 send /sline 3 Disable Save \$1;
 #X connect 0 0 1 0;
 #X connect 2 0 1 0;
 #X connect 3 0 1 0;
@@ -151,6 +153,8 @@
 #X connect 15 3 13 0;
 #X connect 15 4 14 0;
 #X connect 15 5 4 0;
+#X connect 16 0 17 0;
+#X connect 17 0 1 0;
 #X restore 68 168 pd shift-display;
 #X obj 212 166 s enableShift;
 #X obj 281 93 == 1;
