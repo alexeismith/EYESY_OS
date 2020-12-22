@@ -1,4 +1,4 @@
-#N canvas 277 136 1123 660 10;
+#N canvas 252 194 1123 660 10;
 #X obj 108 350 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 108 278 packOSC;
@@ -76,7 +76,7 @@
 #X connect 25 0 7 0;
 #X connect 25 0 26 0;
 #X restore 714 97 pd midi;
-#N canvas 44 23 1636 1005 shift-params 0;
+#N canvas 70 137 1456 605 shift-params 0;
 #X obj 272 1 r shiftKey;
 #X obj 375 106 == 0;
 #X obj 401 141 s enableKnobs;
@@ -113,7 +113,7 @@
 #X obj 416 340 spigot 0;
 #X obj 219 317 r knob2;
 #X obj 418 311 r knob3;
-#N canvas 64 621 1616 469 shift-display 0;
+#N canvas 46 477 1616 469 shift-display 0;
 #X msg 79 153 sendtyped /shift i \$1;
 #X obj 387 421 s oscOut;
 #X msg 268 159 send /sline 0 Input Gain \$1 %;
@@ -134,6 +134,7 @@
 #X obj 502 168 sel 1 2 3 4 5 6;
 #X obj 1124 76 r disableSave;
 #X msg 1218 312 send /sline 3 Disable Save \$1;
+#X msg 1417 316 send /sline 4 \$1;
 #X connect 0 0 1 0;
 #X connect 2 0 1 0;
 #X connect 3 0 1 0;
@@ -154,7 +155,9 @@
 #X connect 15 4 14 0;
 #X connect 15 5 4 0;
 #X connect 16 0 17 0;
+#X connect 16 0 18 0;
 #X connect 17 0 1 0;
+#X connect 18 0 1 0;
 #X restore 68 168 pd shift-display;
 #X obj 212 166 s enableShift;
 #X obj 281 93 == 1;
@@ -201,6 +204,11 @@
 #X floatatom 1153 486 5 0 0 0 - - -;
 #X obj 1152 525 s disableSave;
 #X obj 1100 332 t b b b b b b;
+#X obj 1232 60 r disableSave;
+#X obj 1298 123 r enableShift;
+#X obj 1253 148 spigot 0;
+#X msg 1232 97 sendtyped /savedisable i \$1;
+#X obj 1232 172 s oscOut;
 #X connect 0 0 59 0;
 #X connect 1 0 2 0;
 #X connect 3 0 61 0;
@@ -284,8 +292,11 @@
 #X connect 79 3 15 0;
 #X connect 79 4 58 0;
 #X connect 79 5 57 0;
+#X connect 80 0 83 0;
+#X connect 81 0 82 1;
+#X connect 83 0 84 0;
 #X restore 715 123 pd shift-params;
-#N canvas 87 50 1189 600 knobs-and-keys 0;
+#N canvas 234 256 1189 675 knobs-and-keys 0;
 #X obj 626 186 pack;
 #X text 829 132 pins are SR LOAD \, CLOCK and DATA 4th argument is
 number bits to shift, f 27;
@@ -297,7 +308,7 @@ number bits to shift, f 27;
 #X floatatom 73 120 5 0 0 0 - - -;
 #X obj 83 42 metro 50;
 #X obj 40 255 pack 0 0 0 0 0;
-#X obj 67 523 s oscOut;
+#X obj 64 556 s oscOut;
 #X msg 59 467 sendtyped /knobs iiiiii \$1 \$2 \$3 \$4 \$5 0;
 #X obj 373 408 s oscOut;
 #X obj 617 144 rpi_gpio_shiftin 34 32 33 16;
@@ -363,8 +374,8 @@ number bits to shift, f 27;
 #X msg 373 383 sendtyped /key ii 10 \$1;
 #X obj 576 255 route 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15;
 #X obj 471 -31 t b b b;
-#X obj 64 527 spigot 1;
-#X obj 118 499 r enableKnobs;
+#X obj 62 519 spigot 1;
+#X obj 107 492 r enableKnobs;
 #X obj 936 406 s shiftKey;
 #X obj 64 417 t a a;
 #X obj 101 444 s knobs;

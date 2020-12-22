@@ -159,6 +159,11 @@ def shift_callback(path, args) :
 def shift_line_callback(path, args) :
     global etc
     k = args[0]
+
+    if k == 4 :
+        etc.save_disable = bool(args[1])
+        return
+    
     etc.shift_line[k] = " " + str(k + 1) + ": "
     for item in args[1:] :
         etc.shift_line[k] += " " + str(item)
@@ -187,6 +192,14 @@ def singlekey_callback(path, args) :
     k = int(splitpath[2])
     v = int(args[0])
     keys_callback(path, [k,v])
+
+def save_disable_callback(path, args):
+    global etc
+    # val = args[0]
+    # if val < 0.5 :
+    #     etc.save_disable = False
+    # else:
+    #     etc.save_disable = True
 
 def init (etc_object) :
     global osc_server, osc_target, etc
@@ -237,6 +250,7 @@ def init (etc_object) :
     osc_server.add_method("/linkpresent", 'i', link_present_callback)
     osc_server.add_method("/sline", None, shift_line_callback)
     osc_server.add_method(None, None, fallback)
+    osc_server.add_method("/savedisable", 'i', save_disable_callback)
 
 def recv() :
     global osc_server

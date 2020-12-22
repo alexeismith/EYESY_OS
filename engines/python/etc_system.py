@@ -308,7 +308,8 @@ class System:
             self.save_key_count = 0
         else :
             if (self.save_key_status) :  # key release before delete happens
-                self.save_scene()
+                if not self.save_disable : # check if saving is disabled
+                    self.save_scene()
             self.save_key_status = False
                 
     def delete_current_scene(self):
