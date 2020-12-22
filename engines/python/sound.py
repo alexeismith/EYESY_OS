@@ -8,6 +8,8 @@ trig_this_time = 0
 trig_last_time = 0
 sin = [0] * 100
 
+audio_trig_threshold = 10000
+
 def init (etc_object) :
     global inp, etc, trig_this_time, trig_last_time, sin
     etc = etc_object
@@ -24,7 +26,7 @@ def init (etc_object) :
         sin[i] = int(math.sin(2 * 3.1459 * i / 100) * 32700)
 
 def recv() :
-    global inp, etc, trig_this_time, trig_last_time, sin
+    global inp, etc, trig_this_time, trig_last_time, sin, audio_trig_threshold
     # get audio
     l,data = inp.read()
     peak = 0
@@ -37,7 +39,7 @@ def recv() :
                 avg = avg / 3
                 # scale it
                 avg = int(avg * etc.audio_scale)
-                if (avg > 20000) :
+                if (avg > audio_trig_threshold) :
                     trig_this_time = time.time()
                     if (trig_this_time - trig_last_time) > .05:
                         if etc.audio_trig_enable: etc.audio_trig = True
